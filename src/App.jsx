@@ -1,10 +1,14 @@
 import { useState } from 'react'
+import Login from './Login.jsx'
 import './App.css'
 
 function App() {
+  const [user, setUser] = useState(null)
   const [count, setCount] = useState(0)
   const [todos, setTodos] = useState([])
   const [text, setText] = useState('')
+
+  if (!user) return <Login onLogin={setUser} />
 
   function addTodo(e) {
     e.preventDefault()
@@ -28,7 +32,15 @@ function App() {
 
   return (
     <main className="app">
-      <h1>React App</h1>
+      <header className="app-header">
+        <h1>React App</h1>
+        <div className="app-user">
+          <span>{user.email}</span>
+          <button type="button" className="remove" onClick={() => setUser(null)}>
+            Sign out
+          </button>
+        </div>
+      </header>
 
       <section className="card">
         <h2>Counter</h2>
